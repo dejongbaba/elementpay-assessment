@@ -148,18 +148,18 @@ export function ProcessingModal({ orderId, isOpen, onClose, onOrderFinalized }: 
       setIsWebhookReceived(true);
       
       // Update order state immediately
-      setOrder(prev => prev ? { ...prev, status, updatedAt: timestamp || new Date().toISOString() } : null);
+      setOrder(prev => prev ? { ...prev, status, updated_at: timestamp || new Date().toISOString() } : null);
       
       // Finalize if status indicates completion
       if (status === 'settled' || status === 'failed') {
         const updatedOrder: Order = {
-          id: orderId,
+          order_id: orderId,
           status,
           amount: order?.amount ? Number(order.amount) : 0,
           currency: order?.currency || 'ETH',
-          // walletAddress: order?.walletAddress || '',
+          token: order?.token || '',
           created_at: order?.created_at || new Date().toISOString(),
-          // updatedAt: timestamp || new Date().toISOString()
+          updated_at: timestamp || new Date().toISOString()
         };
         
         finalizeOrder(updatedOrder, 'webhook');
@@ -307,11 +307,11 @@ export function ProcessingModal({ orderId, isOpen, onClose, onOrderFinalized }: 
                   <p className="text-sm text-gray-600">
                     <strong>Amount:</strong> {order.amount} {order.currency}
                   </p>
-                  {/* {order.created_at && (
+                  {order.updated_at && (
                     <p className="text-xs text-gray-500 mt-1">
-                      Last updated: {new Date(order.created_at).toLocaleTimeString()}
+                      Last updated: {new Date(order.updated_at).toLocaleTimeString()}
                     </p>
-                  )} */}
+                  )}
                 </div>
               )}
               
