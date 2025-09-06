@@ -148,6 +148,7 @@ Update `.env.local` with your configuration:
 
 ```env
 WEBHOOK_SECRET=your_webhook_secret_here
+NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_project_id // from cloud.walletconnect.com
 ```
 
 ### 3. Start Development Server
@@ -248,7 +249,7 @@ const signature = crypto
 const headerValue = `t=${timestamp},v1=${signature}`;
 ```
 
-## 📱 Order Status Flow
+## Order Status Flow
 
 Orders progress through the following statuses:
 
@@ -264,7 +265,7 @@ For demo purposes, orders automatically transition:
 - `processing` → `settled` after 30 seconds
 - Any status → `failed` after 60 seconds (timeout)
 
-## 🎯 Testing the Application
+## Testing the Application
 
 ### 1. Connect Wallet
 - Open `http://localhost:3000`
